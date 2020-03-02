@@ -1,0 +1,21 @@
+{
+  "name": "grafana-faker-datasource",
+  "version": "1.0.0",
+  "description": "Fake massive amounts of data",
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch"
+  },
+  "author": "Stephanie Closson",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@grafana/data": "next",
+    "@grafana/toolkit": "next",
+    "@grafana/ui": "next",
+    "@types/lodash": "latest",
+    "@types/faker": "4.1.0",
+    "faker": "4.1.0"
+  }
+}
