@@ -120,6 +120,21 @@ jobs:
         path: ci/jobs/test_6_3_0_beta1
     - store_artifacts:
         path: ci/jobs/test_6_3_0_beta1
+  publish-github-release:
+    working_directory: ~/plugin
+    docker:
+      - image: cibuilds/github:0.12
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "62:64:f0:20:b6:9a:90:97:1a:79:b8:d5:0c:14:ac:c8"
+      - attach_workspace:
+          at: .
+      - run:
+          name: "Publish Release on GitHub"
+          command: |
+            npx grafana-toolkit plugin:github-publish --verbose
   report:
     docker:
     - image: circleci/node:12
