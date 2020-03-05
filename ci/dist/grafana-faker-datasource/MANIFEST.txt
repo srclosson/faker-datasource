@@ -1,0 +1,5 @@
+92170cdc034b2ff819323ff670d3b7266c8bffcd  LICENSE
+64ab28d8463baf2ffbaf3e7c7e85ba4c045e8af8  README.md
+5e86393995f118c68edf18e331d135e4323b0ea7  img/logo.svg
+0cc4db67ca6cfc29b4be9649fea654a9964eaed0  module.js
+2ca93b7e274d08e6e20c7a491c9f9793afff5c3b  plugin.json

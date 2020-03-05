@@ -1,0 +1,47 @@
+{
+  "type": "datasource",
+  "name": "faker-datasource",
+  "id": "grafana-faker-datasource",
+  "metrics": true,
+  "info": {
+    "description": "Fake massive amounts of data",
+    "author": {
+      "name": "Stephanie Closson",
+      "url": "http://www.grafana.com"
+    },
+    "keywords": [
+      "faker",
+      "fake",
+      "mustache",
+      "template",
+      "generate",
+      "data"
+    ],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [
+      {
+        "name": "Website",
+        "url": "https://github.com/grafana/simple-datasource"
+      },
+      {
+        "name": "License",
+        "url": "https://github.com/grafana/simple-datasource/blob/master/LICENSE"
+      }
+    ],
+    "screenshots": [],
+    "version": "1.0.0",
+    "updated": "2020-03-05",
+    "build": {
+      "time": 1583374780923,
+      "branch": "release-1.0.0",
+      "hash": "1264025436aade5b5f5cb1d6bf96fb081e1e6cd6"
+    }
+  },
+  "dependencies": {
+    "grafanaVersion": "6.5.x",
+    "plugins": []
+  }
+}
