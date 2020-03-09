@@ -203,13 +203,21 @@ jobs:
                 go test -v -coverpkg=./... --coverprofile=coverage.out ./...
                 go test ./... -coverprofile cover.out; go tool cover -func cover.out
 
-    publish-github-release:
+    publish_github_release:
         <<: *defaults
         steps:
             - checkout
+            - attach_workspace:
+                at: .
+            - restore_cache:
+                keys:
+                - yarn-packages-{{ checksum "yarn.lock" }}
             - add_ssh_keys:
                 fingerprints:
                     - "62:64:f0:20:b6:9a:90:97:1a:79:b8:d5:0c:14:ac:c8"
+            - run:
+                name: Pull Packages
+                command: yarn install --pure-lockfile
             - attach_workspace:
                 at: .
             - run:
