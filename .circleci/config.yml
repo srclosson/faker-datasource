@@ -17,7 +17,7 @@ jobs:
             - run:
                 name: Prepare directory for compile
                 command: |
-                    if [ -z "plugin/ci" ]; then
+                    if [ -z 'plugin/ci' ]; then
                         mkdir -pv plugin/ci/jobs/build_plugin/dist
                     fi
 
@@ -32,6 +32,8 @@ jobs:
                     if [ -d 'src/dashboards' ]; then
                         cp -r src/dashboards ci/jobs/build_plugin/dist
                     fi
+
+                    ls -laR ~
             - persist_to_workspace:
                     root: .
                     paths:
