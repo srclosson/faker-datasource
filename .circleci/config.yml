@@ -191,8 +191,6 @@ workflows:
             - package:
                 requires:
                     - build_plugin
-                    - build_docs
-                    - test_backend
             - test_integration:
                 requires:
                     - package
