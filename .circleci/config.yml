@@ -18,6 +18,10 @@ jobs:
                 name: Prepare directory for compile
                 command: |
                     [ -d "ci" ] || mkdir -pv ci
+            - persist_to_workspace:
+                    root: .
+                    paths:
+                        - ci
     build_plugin:
         <<: *defaults
         steps:
