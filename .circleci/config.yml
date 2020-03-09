@@ -62,11 +62,12 @@ jobs:
                 keys:
                     - yarn-packages-{{ checksum "yarn.lock" }}
             - run:
+                name: Pull Packages
+                command: yarn install --pure-lockfile
+            - run:
                 name: Install dependencies
                 command: |
                     if [ -d 'pkg' ]; then
-                        yarn install --pure-lockfile
-
                         echo 'export PATH=$HOME/go/bin:/usr/local/go/bin:$PATH' >> $BASH_ENV
                         source $BASH_ENV
 
