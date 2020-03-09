@@ -179,10 +179,7 @@ workflows:
     version: 2
     plugin_workflow:
         jobs:
-            - prepare
-            - build_plugin:
-                requires:
-                    - prepare
+            - build_plugin
             - package:
                 requires:
                     - build_plugin
