@@ -45,7 +45,8 @@ jobs:
                 command: npx grafana-toolkit plugin:ci-build
             - save_cache:
                 name: Save Yarn Package Cache
-                paths: [ node_modules ]
+                paths: 
+                    - node_modules
                 key: yarn-packages-{{ checksum "yarn.lock" }}
             - persist_to_workspace:
                 root: .
@@ -63,7 +64,7 @@ jobs:
                     - yarn-packages-{{ checksum "yarn.lock" }}
             - run:
                 name: Package Distribution
-                command: npx grafana-toolkit plugin:ci-package
+                command: npx grafana-toolkit plugin:ci-build --finish && npx grafana-toolkit plugin:ci-package
             - persist_to_workspace:
                 root: .
                 paths:
