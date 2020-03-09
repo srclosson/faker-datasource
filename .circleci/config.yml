@@ -17,7 +17,21 @@ jobs:
             - run:
                 name: Prepare directory for compile
                 command: |
-                    [ -d "ci" ] || mkdir -pv ci
+                    if [ -z "ci" ]; then
+                        mkdir -pv ci/jobs/build_plugin/dist
+                    fi
+                    
+                    #
+                    # copy external libraries
+                    #
+                    [ -d 'src/lib' ] && cp -r src/lib ci/jobs/build_plugin/dist
+                
+                    #
+                    # copy dashboards
+                    #
+                    if [ -d 'src/dashboards' ]; then
+                        cp -r src/dashboards ci/jobs/build_plugin/dist
+                    fi
             - persist_to_workspace:
                     root: .
                     paths:
@@ -52,22 +66,11 @@ jobs:
             - attach_workspace:
                 at: .
             - restore_cache:
-                keys: [ "yarn-packages-{{ checksum \"yarn.lock\" }}" ]
+                keys: 
+                    - yarn-packages-{{ checksum "yarn.lock" }}
             - run:
                 name: Package Distribution
                 command: |
-                    #
-                    # copy external libraries
-                    #
-                    [ -d 'src/lib' ] && cp -r src/lib ci/jobs/build_plugin/dist
-                
-                    #
-                    # copy dashboards
-                    #
-                    if [ -d 'src/dashboards' ]; then
-                        cp -r src/dashboards ci/jobs/build_plugin/dist
-                    fi
-
                     #
                     # Perform the build using toolkit
                     #
