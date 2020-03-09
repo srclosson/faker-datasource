@@ -24,7 +24,8 @@ jobs:
             - checkout
             - restore_cache:
                 name: Restore Yarn Package Cache
-                keys: [ "yarn-packages-{{ checksum \"yarn.lock\" }}" ]
+                keys: 
+                    - yarn-packages-{{ checksum "yarn.lock" }}
             - run:
                 name: Pull Packages
                 command: yarn install --pure-lockfile
