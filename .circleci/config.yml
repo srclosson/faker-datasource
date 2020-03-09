@@ -65,8 +65,9 @@ jobs:
                 name: Pull Packages
                 command: yarn install --pure-lockfile
             - run:
-                name: Install dependencies
+                name: Compile Backend
                 command: |
+                    [ -d "ci" ] || mkdir ci
                     if [ -d 'pkg' ]; then
                         echo 'export PATH=$HOME/go/bin:/usr/local/go/bin:$PATH' >> $BASH_ENV
                         source $BASH_ENV
