@@ -30,7 +30,8 @@ jobs:
                 key: yarn-packages-{{ checksum "yarn.lock" }}
             - persist_to_workspace:
                 root: .
-                paths: [ ci ]
+                paths: 
+                    - ci
 
     package:
         <<: *defaults
@@ -43,23 +44,6 @@ jobs:
             - run:
                 name: Package Distribution
                 command: |
-                    # 
-                    # If this plugin has a backend component, build it.
-                    #
-                    if [ -d 'pkg']; then
-                        ls -l ci || mkdir -pv ci
-                        ls -l ci/jobs || mkdir -pv ci/jobs
-                        ls -l ci/jobs/build_linux || mkdir -pv ci/jobs/build_linux
-                        ls -l ci/jobs/build_osx || mkdir -pv ci/jobs/build_osx
-                        ls -l ci/jobs/build_win64 || mkdir -pv ci/jobs/build_win64
-                        ls -l ci/jobs/build_plugin || mkdir -pv ci/jobs/build_plugin
-                        ls -l ci/jobs/build_plugin/dist || mkdir -pv ci/jobs/build_plugin/dist
-                        cp ci/jobs/build_linux/* ci/jobs/build_plugin/dist
-                        cp ci/jobs/build_osx/* ci/jobs/build_plugin/dist
-                        cp ci/jobs/build_win64/* ci/jobs/build_plugin/dist                
-                        ls -l ci/jobs/build_plugin/dist
-                    fi
-
                     #
                     # copy external libraries
                     #
