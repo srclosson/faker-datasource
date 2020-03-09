@@ -17,10 +17,10 @@ jobs:
             - run:
                 name: Prepare directory for compile
                 command: |
-                    if [ -z "ci" ]; then
-                        mkdir -pv ci/jobs/build_plugin/dist
+                    if [ -z "plugin/ci" ]; then
+                        mkdir -pv plugin/ci/jobs/build_plugin/dist
                     fi
-                    
+
                     #
                     # copy external libraries
                     #
