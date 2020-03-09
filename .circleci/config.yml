@@ -5,7 +5,7 @@ aliases:
         only: master
 
 defaults: &defaults
-    working_directory: ~/grafana-servicenow-datasource
+    working_directory: ~/plugin
     docker:
         - image: circleci/node:12.13-buster
 
