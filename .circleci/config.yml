@@ -11,14 +11,22 @@ defaults: &defaults
 
 version: 2
 jobs:
-    prepare:
+    build_plugin:
         <<: *defaults
         steps:
+            - checkout
+            - restore_cache:
+                name: Restore Yarn Package Cache
+                keys: 
+                    - yarn-packages-{{ checksum "yarn.lock" }}
             - run:
-                name: Prepare directory for compile
+                name: Pull Packages
+                command: yarn install --pure-lockfile
+            - run:
+                name: Prepare directory for build
                 command: |
-                    if [ -z 'plugin/ci' ]; then
-                        mkdir -pv plugin/ci/jobs/build_plugin/dist
+                    if [ -z 'ci' ]; then
+                        mkdir -pv ci/jobs/build_plugin/dist
                     fi
 
                     #
@@ -32,23 +40,6 @@ jobs:
                     if [ -d 'src/dashboards' ]; then
                         cp -r src/dashboards ci/jobs/build_plugin/dist
                     fi
-
-                    ls -laR ~
-            - persist_to_workspace:
-                    root: .
-                    paths:
-                        - ci
-    build_plugin:
-        <<: *defaults
-        steps:
-            - checkout
-            - restore_cache:
-                name: Restore Yarn Package Cache
-                keys: 
-                    - yarn-packages-{{ checksum "yarn.lock" }}
-            - run:
-                name: Pull Packages
-                command: yarn install --pure-lockfile
             - run:
                 name: Run Toolkit Build
                 command: npx grafana-toolkit plugin:ci-build
