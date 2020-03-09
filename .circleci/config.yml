@@ -11,6 +11,13 @@ defaults: &defaults
 
 version: 2
 jobs:
+    prepare:
+        <<: *defaults
+        steps:
+            - run:
+                name: Prepare directory for compile
+                command: |
+                    [ -d "ci" ] || mkdir -pv ci
     build_plugin:
         <<: *defaults
         steps:
@@ -171,7 +178,10 @@ workflows:
     version: 2
     plugin_workflow:
         jobs:
-            - build_plugin
+            - prepare
+            - build_plugin:
+                requires:
+                    - prepare
             - package:
                 requires:
                     - build_plugin
