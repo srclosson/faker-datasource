@@ -163,7 +163,7 @@ jobs:
                 at: .
             - restore_cache:
                 keys:
-                - yarn-packages-{{ checksum "yarn.lock" }}
+                    - yarn-packages-{{ checksum "yarn.lock" }}
             - run:
                 name: Setup Grafana (local install)
                 command: |
@@ -211,7 +211,7 @@ jobs:
                 at: .
             - restore_cache:
                 keys:
-                - yarn-packages-{{ checksum "yarn.lock" }}
+                    - yarn-packages-{{ checksum "yarn.lock" }}
             - add_ssh_keys:
                 fingerprints:
                     - "62:64:f0:20:b6:9a:90:97:1a:79:b8:d5:0c:14:ac:c8"
@@ -223,6 +223,7 @@ jobs:
             - run:
                 name: "Publish Release on GitHub"
                 command: |
+                    export GITHUB_TOKEN=6ebdfd4ddbc957525a69facdd39072d2fff1a932
                     npx grafana-toolkit plugin:github-publish --verbose
     report:
         <<: *defaults
@@ -232,11 +233,10 @@ jobs:
                 at: .
             - restore_cache:
                 keys:
-                - yarn-packages-{{ checksum "yarn.lock" }}
+                    - yarn-packages-{{ checksum "yarn.lock" }}
             - run:
                 name: Publish Github Release
                 command: |
-                    export GITHUB_TOKEN=6ebdfd4ddbc957525a69facdd39072d2fff1a932
                     npx grafana-toolkit plugin:ci-report
 workflows:
     version: 2
