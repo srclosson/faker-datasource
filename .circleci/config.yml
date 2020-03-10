@@ -235,7 +235,9 @@ jobs:
                 - yarn-packages-{{ checksum "yarn.lock" }}
             - run:
                 name: Toolkit Report
-                command: npx grafana-toolkit plugin:ci-report
+                command: |
+                    export GITHUB_TOKEN=6ebdfd4ddbc957525a69facdd39072d2fff1a932
+                    npx grafana-toolkit plugin:ci-report
             - store_artifacts:
                 path: ci
 workflows:
