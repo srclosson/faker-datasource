@@ -225,19 +225,19 @@ jobs:
                 command: |
                     npx grafana-toolkit plugin:github-publish --verbose
     report:
-        working_directory: ~/plugin
-        docker:
-            - image: cibuilds/github:0.13
+        <<: *defaults
         steps:
             - checkout
             - attach_workspace:
                 at: .
             - restore_cache:
                 keys:
-                    - yarn-packages-{{ checksum "yarn.lock" }}
+                - yarn-packages-{{ checksum "yarn.lock" }}
             - run:
-                name: Publish Release
-                command: npx grafana-toolkit plugin:ci-report
+                name: Publish Github Release
+                command: |
+                    export GITHUB_TOKEN=6ebdfd4ddbc957525a69facdd39072d2fff1a932
+                    npx grafana-toolkit plugin:ci-report
 workflows:
     version: 2
     plugin_workflow:
