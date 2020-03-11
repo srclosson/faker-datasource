@@ -214,7 +214,7 @@ jobs:
                     - yarn-packages-{{ checksum "yarn.lock" }}
             - add_ssh_keys:
                 fingerprints:
-                    - "68:fc:e7:a8:c3:2a:90:25:44:eb:a0:5e:f7:c4:a7:7b"
+                    - "85:08:98:8e:6c:33:1c:e9:02:d0:eb:be:52:d7:d4:7d"
             - run:
                 name: Pull Packages
                 command: yarn install --pure-lockfile
