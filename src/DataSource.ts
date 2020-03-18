@@ -28,14 +28,17 @@ export class DataSource extends DataSourceApi<FakerQuery, FakerDataSourceOptions
         data: lines.map(l => [] as any[]), // Lines
       };
 
+      if (target.limit) {
+        const elapsed = range!.to.valueOf() - range!.from.valueOf();
+        options.intervalMs = elapsed / target.limit;
+      }
       for (let time: number = range!.from.valueOf(), to: number = range!.to.valueOf(); time < to; time += options.intervalMs || 5000) {
         generatedData.time.push(time);
         lines.forEach((line, i) => {
-          generatedData.data[i].push(faker.fake(line));
+          generatedData.data[i].push(faker.fake(line.split(' as ')[0]));
         });
       }
 
-      console.log('generatedData', generatedData);
       const dataEntry: DataFrame = {
         refId: target.refId,
         fields: [
@@ -53,8 +56,15 @@ export class DataSource extends DataSourceApi<FakerQuery, FakerDataSourceOptions
               type = FieldType.number;
             }
 
+            let alias = line;
+            const splitLine = line.split(' as ');
+            if (splitLine.length === 1) {
+              alias = splitLine[0];
+            } else {
+              alias = splitLine[1];
+            }
             return {
-              name: line,
+              name: alias,
               type,
               values: new ArrayVector(generatedData.data[i]),
               config: {},
