@@ -16,8 +16,6 @@ executors:
 jobs:
   compile_dependencies:
     executor: default_exec
-    machine:
-      docker_layer_caching: true
     steps:
       - checkout
       - restore_cache:
