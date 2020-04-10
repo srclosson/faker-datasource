@@ -22,6 +22,9 @@ export class DataSource extends DataSourceApi<FakerQuery, FakerDataSourceOptions
     const data: DataFrame[] = [];
 
     options.targets.forEach((target: FakerQuery) => {
+      if (!target.script) {
+        return;
+      }
       const lines = target.script.split('\n');
       const generatedData: any = {
         time: [] as number[], // Time
