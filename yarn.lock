@@ -1057,9 +1057,9 @@
     url-loader "^2.0.1"
     webpack "4.41.5"
 
-"@grafana/tsbackend@srclosson/grafana-tsbackend#src/dataquery":
+"@grafana/tsbackend@grafana/grafana-plugin-sdk-typescript":
   version "1.0.0"
-  resolved "https://codeload.github.com/srclosson/grafana-tsbackend/tar.gz/3c6bfdb38a6001c31bc9552c46d1410c61358e51"
+  resolved "git+ssh://git@github.com/grafana/grafana-plugin-sdk-typescript.git#a4accc4724fd898af3c76a2ffea42658bf3f7f4a"
 
 "@grafana/tsconfig@1.0.0-rc1", "@grafana/tsconfig@^1.0.0-rc1":
   version "1.0.0-rc1"
