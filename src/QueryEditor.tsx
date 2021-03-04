@@ -1,8 +1,8 @@
 import React, { PureComponent, RefObject, FocusEvent, ChangeEvent } from 'react';
 import { QueryEditorProps } from '@grafana/data';
-import { FormField } from '@grafana/ui';
+import { LegacyForms } from '@grafana/ui';
 import { DataSource } from './DataSource';
-import { FakerQuery, FakerDataSourceOptions } from './types';
+import { FakerQuery, FakerDataSourceOptions } from '../shared/types';
 
 type Props = QueryEditorProps<DataSource, FakerQuery, FakerDataSourceOptions>;
 
@@ -52,7 +52,7 @@ export class QueryEditor extends PureComponent<Props, State> {
           />
         </div>
         <div className="gf-form">
-          <FormField label="Limit" value={this.props.query.limit} onBlur={this.onLimitBlur} />
+          <LegacyForms.FormField label="Limit" value={this.props.query.limit} onBlur={this.onLimitBlur} />
         </div>
       </>
     );

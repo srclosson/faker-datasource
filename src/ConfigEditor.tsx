@@ -1,6 +1,6 @@
 import React, { PureComponent, ChangeEvent } from 'react';
 import { DataSourcePluginOptionsEditorProps } from '@grafana/data';
-import { FakerDataSourceOptions } from './types';
+import { FakerDataSourceOptions } from '../shared/types';
 
 interface Props extends DataSourcePluginOptionsEditorProps<FakerDataSourceOptions> {}
 

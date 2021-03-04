@@ -3,21 +3,28 @@
   "version": "1.0.0",
   "description": "Fake massive amounts of data",
   "scripts": {
+    "prebuild": "cd ./node_modules/@grafana/tsbackend/ && yarn install",
     "build": "grafana-toolkit plugin:build",
     "test": "grafana-toolkit plugin:test",
-    "dev": "grafana-toolkit plugin:dev",
-    "watch": "grafana-toolkit plugin:dev --watch"
+    "dev": "grafana-toolkit plugin:dev && yarn backend",
+    "backend": "./node_modules/@grafana/tsbackend/bin/grafana-tsbackend gpx_faker_darwin_amd64",
+    "restart:backend": "kill $(ps -ef | grep gpx_faker_darwin_amd64 | grep -v grep | awk '{ print $2 }')",
+    "watch": "grafana-toolkit plugin:dev --watch",
+    "build-all": "yarn build && yarn backend"
   },
   "author": "Stephanie Closson",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@grafana/data": "6.6.2",
-    "@grafana/eslint-config": "next",
-    "@grafana/tsconfig": "latest",
-    "@grafana/toolkit": "canary",
-    "@grafana/ui": "6.6.2",
-    "@types/faker": "4.1.0",
-    "@types/lodash": "latest",
-    "faker": "4.1.0"
+    "@grafana/data": "7.4.2",
+    "@grafana/tsconfig": "1.0.0-rc1",
+    "@grafana/toolkit": "7.4.2",
+    "@grafana/runtime": "7.4.2",
+    "@grafana/ui": "7.4.2",
+    "@types/faker": "5.1.7",
+    "@types/lodash": "4.14.168",
+    "faker": "5.4.0",
+    "grpc": "1.24.5",
+    "google-protobuf": "3.15.4",
+    "@grafana/tsbackend": "srclosson/grafana-tsbackend#src/dataquery"
   }
 }

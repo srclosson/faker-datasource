@@ -3,6 +3,8 @@
   "name": "faker-datasource",
   "id": "grafana-faker-datasource",
   "metrics": true,
+  "backend": true,
+  "executable": "gpx_faker",
   "info": {
     "description": "Fake massive amounts of data",
     "author": {
