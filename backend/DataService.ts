@@ -1,23 +1,23 @@
-import { DataFrame, DataService, DataRequest } from '@grafana/tsbackend';
+import { DataFrame, DataService, DataQuery } from '@grafana/tsbackend';
 import { FieldType, ArrayVector, dateTime } from '@grafana/data';
-import { FakerQuery } from '../shared/types';
+import { FakerQuery, FakerDataSourceOptions } from '../shared/types';
 import * as faker from 'faker';
 
-export class FakerDataService extends DataService<FakerQuery> {
+export class FakerDataService extends DataService<FakerQuery, FakerDataSourceOptions> {
   constructor() {
     super();
   }
 
-  QueryData(request: DataRequest<FakerQuery>): Promise<DataFrame[]> {
+  QueryData(request: DataQuery<FakerQuery>): Promise<DataFrame[]> {
     const data: DataFrame[] = [];
     const { timerange, query, intervalms, refid } = request;
     if (!query.script) {
       return Promise.resolve(data);
     }
-    const lines = query.script.split('\n');
+    const lines: string[] = query.script.split('\n');
     const generatedData: any = {
       time: [] as number[], // Time
-      data: lines.map(l => [] as any[]), // Lines
+      data: lines.map((l: string) => [] as any[]), // Lines
     };
 
     if (!timerange) {
