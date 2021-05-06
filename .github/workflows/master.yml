@@ -1,12 +1,12 @@
-name: Pull Requests
+name: Build Master on Push
 
 on:
-  pull_request:
+  push:
     branches:
-      - master # Run workflow on PR to master
+      - master
 
 jobs:
-  pull_request:
+  build_master:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,7 @@ jobs:
         run: yarn build
 
       - name: Build plugin for coverage
-        run: npx @grafana/toolkit@next plugin:ci-build
+        run: npx @grafana/toolkit@canary plugin:ci-build
 
       - name: Code Climate
         run: |
@@ -40,4 +40,3 @@ jobs:
         run: |
           ./ccbin/cc-test-reporter sum-coverage out/codeclimate.*.json -d -p 1 -o out/codeclimate.total.json
           ./ccbin/cc-test-reporter upload-coverage -i out/codeclimate.total.json
-
