@@ -1,4 +1,4 @@
-import { DataFrame, DataService, DataQuery } from '@grafana/tsbackend';
+import { DataFrame, DataService, DataQuery, logger } from '@grafana/tsbackend';
 import { FieldType, ArrayVector, dateTime } from '@grafana/data';
 import { FakerQuery, FakerDataSourceOptions } from '../shared/types';
 import * as faker from 'faker';
@@ -25,7 +25,8 @@ export class FakerDataService extends DataService<FakerQuery, FakerDataSourceOpt
     }
 
     for (let time: number = timerange.fromepochms; time < timerange.toepochms; time += intervalms) {
-      generatedData.time.push(time);
+      // Value must be nanosecond resolution
+      generatedData.time.push(time * 1000);
       lines.forEach((line, i) => {
         generatedData.data[i].push(faker.fake(line.split(' as ')[0]));
       });
