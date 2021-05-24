@@ -1,4 +1,4 @@
-import { DataFrame, DataService, DataQuery, logger } from '@grafana/tsbackend';
+import { DataFrame, DataService, DataQuery } from '@grafana/tsbackend';
 import { FieldType, ArrayVector, dateTime } from '@grafana/data';
 import { FakerQuery, FakerDataSourceOptions } from '../shared/types';
 import * as faker from 'faker';
