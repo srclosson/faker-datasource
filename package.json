@@ -7,7 +7,13 @@
     "build": "grafana-toolkit plugin:build",
     "test": "grafana-toolkit plugin:test",
     "dev": "grafana-toolkit plugin:dev && yarn backend",
-    "backend": "./node_modules/@grafana/tsbackend/bin/grafana-tsbackend",
+    "backend:compile:darwin": "./node_modules/@grafana/tsbackend/bin/grafana-tsbackend compile darwin",
+    "backend:pkg:darwin": "./node_modules/@grafana/tsbackend/bin/grafana-tsbackend pkg darwin node14-macos-x64",
+    "backend:pkg:linux": "./node_modules/@grafana/tsbackend/bin/grafana-tsbackend pkg linux node14-linux-x64",
+    "backend:nexe:darwin": "./node_modules/@grafana/tsbackend/bin/grafana-tsbackend nexe darwin darwin-x64-14.16.1",
+    "backend:nexe:linux": "./node_modules/@grafana/tsbackend/bin/grafana-tsbackend nexe linux linux-x64-14.16.1",
+    "backend:deno:darwin": "./node_modules/@grafana/tsbackend/bin/grafana-tsbackend deno darwin x86_64-apple-darwin",
+    "backend": "yarn backend:compile",
     "restart:backend": "kill $(ps -ef | grep gpx_faker | grep -v grep | awk '{ print $2 }')",
     "watch": "grafana-toolkit plugin:dev --watch",
     "build-all": "yarn build && yarn backend"
@@ -22,9 +28,14 @@
     "@grafana/ui": "7.5.4",
     "@types/faker": "5.5.3",
     "@types/lodash": "4.14.168",
+    "@types/node": "15.6.1",
+    "node": "16.1.0",
     "faker": "5.5.3",
+    "@grafana/tsbackend": "grafana/grafana-plugin-sdk-typescript#src/update-compile-pkg"
+  },
+  "dependencies": {
     "grpc": "1.24.9",
-    "google-protobuf": "3.16.0-rc.2",
-    "@grafana/tsbackend": "grafana/grafana-plugin-sdk-typescript"
+    "google-protobuf": "3.16.0-rc.2"
   }
 }
+
